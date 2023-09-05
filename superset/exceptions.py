@@ -278,3 +278,16 @@ class QueryNotFoundException(SupersetException):
 
 class ColumnNotFoundException(SupersetException):
     status = 404
+
+
+class SupersetMarshmallowValidationError(SupersetErrorException):
+    status = 422
+
+    def __init__(self, exc: ValidationError):
+        error = SupersetError(
+            message="An error happened when validating the request",
+            error_type=SupersetErrorType.MARSHMALLOW_ERROR,
+            level=ErrorLevel.ERROR,
+            extra={"messages": exc.messages},
+        )
+        super().__init__(error)
