@@ -26,6 +26,8 @@ import os
 from celery.schedules import crontab
 from flask_caching.backends.filesystemcache import FileSystemCache
 
+SECRET_KEY = '004f2af45d3a4e161a7dd2d17fdae47f'
+
 logger = logging.getLogger()
 
 DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
@@ -42,6 +44,8 @@ EXAMPLES_PORT = os.getenv("EXAMPLES_PORT")
 EXAMPLES_DB = os.getenv("EXAMPLES_DB")
 
 # The SQLAlchemy connection string.
+
+
 SQLALCHEMY_DATABASE_URI = (
     f"{DATABASE_DIALECT}://"
     f"{DATABASE_USER}:{DATABASE_PASSWORD}@"
@@ -92,7 +96,7 @@ class CeleryConfig:
 
 CELERY_CONFIG = CeleryConfig
 
-FEATURE_FLAGS = {"ALERT_REPORTS": True}
+FEATURE_FLAGS = {"ALERT_REPORTS": True, "EMBEDDED_SUPERSET": True}
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = "http://superset:8088/"
 # The base URL for the email report hyperlinks.
@@ -113,3 +117,5 @@ try:
     )
 except ImportError:
     logger.info("Using default Docker config...")
+
+WTF_CSRF_ENABLED = False
