@@ -119,3 +119,6 @@ except ImportError:
     logger.info("Using default Docker config...")
 
 WTF_CSRF_ENABLED = False
+TALISMAN_ENABLED = False
+PUBLIC_ROLE_LIKE_GAMMA = True
+GUEST_ROLE_NAME = "Gamma"
